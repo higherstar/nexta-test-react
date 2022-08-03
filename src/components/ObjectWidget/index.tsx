@@ -6,8 +6,8 @@ import { DatePicker } from '../DatePicker';
 import { IObject, IPoint } from '../../interfaces';
 
 interface IObjectWidgetProps {
-  object?: IObject;
-  onSave: (IObject) => void;
+  object?: IObject | null;
+  onSave: (object: IObject) => void;
 }
 
 // Export datepicker
@@ -24,19 +24,24 @@ export const ObjectWidget: FC<IObjectWidgetProps> = ({
       setPoint(object.point);
       setColor(object.color);
       setDate(object.date);
+    } else {
+      setPoint([0, 0]);
+      setColor('');
+      setDate(null);
     }
   }, [object]);
 
   const handleChangePoint = (e, axis) => {
-    point[axis]  = e.target.value;
-    setPoint(point);
+    const p = point;
+    p[axis]  = e.target.value;
+    setPoint(p);
   }
 
   const handleSave = () => {
     onSave({
       point,
       color,
-      date,
+      date: date || new Date(),
     });
   }
 
@@ -76,7 +81,7 @@ export const ObjectWidget: FC<IObjectWidgetProps> = ({
       </FormControl>
 
       <Box width="100%" display="flex" justifyContent="flex-end">
-        <Button onClick={handleSave}>Save</Button>
+        <Button disabled={!point || !color || !date} onClick={handleSave}>Save</Button>
       </Box>
     </Stack>
   );

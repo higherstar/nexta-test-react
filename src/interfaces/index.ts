@@ -1,4 +1,5 @@
 export interface IObject {
+  id?: number,
   point: IPoint,
   color: string,
   date: Date,
