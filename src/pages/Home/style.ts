@@ -7,6 +7,7 @@ export const classes = {
   card: `${PREFIX}-card`,
   list: `${PREFIX}-list`,
   buttonWrapper: `${PREFIX}-button-wrapper`,
+  colorBadge: `${PREFIX}-color-badge`,
 };
 
 export const Root = styled('div')(({ theme }) => ({
@@ -30,6 +31,13 @@ export const Root = styled('div')(({ theme }) => ({
       display: 'flex',
       [`& .${classes.list}`]: {
         width: '300px',
+      },
+
+      [`& .${classes.colorBadge}`]: {
+        marginRight: theme.spacing(2),
+        width: 20,
+        height: 20,
+        borderRadius: 40,
       },
     }
   },

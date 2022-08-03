@@ -32,8 +32,8 @@ export const ObjectWidget: FC<IObjectWidgetProps> = ({
   }, [object]);
 
   const handleChangePoint = (e, axis) => {
-    const p = point;
-    p[axis]  = e.target.value;
+    const p: IPoint = [point[0], point[1]];
+    p[axis]  = +e.target.value;
     setPoint(p);
   }
 
@@ -53,11 +53,15 @@ export const ObjectWidget: FC<IObjectWidgetProps> = ({
           size="medium"
           label="X"
           sx={{ mb: 1 }}
+          type="number"
+          value={point[0]}
           onChange={(e) => handleChangePoint(e, 0)}
         />
         <TextField
           size="medium"
           label="Y"
+          value={point[1]}
+          type="number"
           onChange={(e) => handleChangePoint(e, 1)}
         />
       </FormControl>

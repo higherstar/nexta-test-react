@@ -1,15 +1,5 @@
 import React, { FC, useState } from 'react';
-import {
-  Box,
-  Button,
-  Container,
-  Divider,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Paper
-} from '@mui/material';
+import { Box, Button, Container, Divider, List, ListItem, ListItemButton, ListItemText, Paper } from '@mui/material';
 
 import { classes, Root } from './style';
 import { ObjectWidget } from '../../components/ObjectWidget';
@@ -21,11 +11,11 @@ export const Home: FC = () => {
 
   const handleSaveObject = (object: IObject) => {
     if (!selectedObject) {
-      const id = Date.now();
-      object.id = id;
+      object.id = Date.now();
       setObjectList([...objectList, object]);
       setSelectedObject(object);
     } else {
+      object.id = selectedObject.id;
       setObjectList(
         objectList.map((objectItem) =>
           objectItem.id === selectedObject.id ? object : objectItem)
@@ -51,10 +41,20 @@ export const Home: FC = () => {
         <Paper className={classes.card}>
           <List className={classes.list}>
             {
-              objectList.map((object) => (
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemText primary={object.date.toString()} secondary={object.color} />
+              objectList.map((object, index) => (
+                <ListItem key={index} disablePadding>
+                  <ListItemButton
+                    selected={object.id === selectedObject?.id}
+                    onClick={() => setSelectedObject(object)}
+                  >
+                    <span
+                      className={classes.colorBadge}
+                      style={{ background: object.color }}
+                    />
+                    <ListItemText
+                      primary={`${object.point[0]}' ${object.point[1]}"`}
+                      secondary={object.date.toDateString()}
+                    />
                   </ListItemButton>
                 </ListItem>
               ))
