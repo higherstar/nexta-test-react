@@ -8,8 +8,8 @@ import { TextField } from '@mui/material';
 interface IDatePickerProps {
   label?: string;
   format?: string;
-  onChange: (date: string | Date | null) => void;
-  value: string;
+  onChange: (date: Date | null) => void;
+  value: Date | null;
 }
 
 // Export datepicker

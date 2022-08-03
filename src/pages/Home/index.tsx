@@ -11,12 +11,17 @@ import {
   Paper
 } from '@mui/material';
 
-import { ObjectWidget } from '../../components/ObjectWidget';
 import { classes, Root } from './style';
+import { ObjectWidget } from '../../components/ObjectWidget';
+import { IObject } from '../../interfaces';
 
 export const Home: FC = () => {
   const [objectList, setObjectList] = useState();
   const [selectedObject, setSelectedObject] = useState();
+
+  const handleSaveObject = (object: IObject) => {
+
+  };
 
   return (
     <Root className={classes.root}>
@@ -35,8 +40,11 @@ export const Home: FC = () => {
 
           <Divider orientation="vertical" flexItem />
 
-          <Box p={4}>
-            <ObjectWidget />
+          <Box p={4} flex={1}>
+            <ObjectWidget
+              object={selectedObject}
+              onSave={handleSaveObject}
+            />
           </Box>
         </Paper>
       </Container>
